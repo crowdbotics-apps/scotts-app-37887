@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from home.models import Providers,Reviews,Service_Category,Users,Vendors
-from .serializers import ProvidersSerializer,ReviewsSerializer,Service_CategorySerializer,UsersSerializer,VendorsSerializer
+from home.models import Providers
+from .serializers import ProvidersSerializer
 from rest_framework import authentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.viewsets import ModelViewSet, ViewSet
@@ -33,27 +33,7 @@ class LoginViewSet(ViewSet):
         user_serializer = UserSerializer(user)
         return Response({"token": token.key, "user": user_serializer.data})
 
-class Service_CategoryViewSet(viewsets.ModelViewSet):
-    serializer_class = Service_CategorySerializer
-    authentication_classes = (authentication.SessionAuthentication, authentication.TokenAuthentication)
-    queryset = Service_Category.objects.all()
-
-class VendorsViewSet(viewsets.ModelViewSet):
-    serializer_class = VendorsSerializer
-    authentication_classes = (authentication.SessionAuthentication, authentication.TokenAuthentication)
-    queryset = Vendors.objects.all()
-
-class UsersViewSet(viewsets.ModelViewSet):
-    serializer_class = UsersSerializer
-    authentication_classes = (authentication.SessionAuthentication, authentication.TokenAuthentication)
-    queryset = Users.objects.all()
-
 class ProvidersViewSet(viewsets.ModelViewSet):
     serializer_class = ProvidersSerializer
     authentication_classes = (authentication.SessionAuthentication, authentication.TokenAuthentication)
     queryset = Providers.objects.all()
-
-class ReviewsViewSet(viewsets.ModelViewSet):
-    serializer_class = ReviewsSerializer
-    authentication_classes = (authentication.SessionAuthentication, authentication.TokenAuthentication)
-    queryset = Reviews.objects.all()
